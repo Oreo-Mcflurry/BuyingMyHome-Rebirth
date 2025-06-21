@@ -79,14 +79,14 @@ jobs:
       run: |
         xcodebuild -workspace BuyingMyHome.xcworkspace \
                    -scheme BuyingMyHome \
-                   -destination 'platform=iOS Simulator,name=iPhone 15' \
+                   -destination 'platform=iOS Simulator,name=Any iOS Simulator Device' \
                    build
                    
     - name: Run tests
       run: |
         xcodebuild -workspace BuyingMyHome.xcworkspace \
                    -scheme BuyingMyHome \
-                   -destination 'platform=iOS Simulator,name=iPhone 15' \
+                   -destination 'platform=iOS Simulator,name=Any iOS Simulator Device' \
                    test
                    
   lint:
