@@ -24,8 +24,15 @@ jobs:
         
     - name: Install Tuist
       run: |
-        mise install tuist@latest
-        
+        ~/.local/bin/mise install tuist@latest
+        ~/.local/bin/mise use tuist@latest
+    
+    - name: Check Tuist path
+      run: |
+        export PATH="$HOME/.local/bin:$PATH"
+        which tuist
+        tuist --version
+    
     - name: Cache Tuist
       uses: actions/cache@v3
       with:
@@ -37,10 +44,14 @@ jobs:
           ${{ runner.os }}-tuist-
     
     - name: Install dependencies
-      run: tuist install
+      run: |
+        export PATH="$HOME/.local/bin:$PATH"
+        tuist install
       
     - name: Generate project
-      run: tuist generate
+      run: |
+        export PATH="$HOME/.local/bin:$PATH"
+        tuist generate
       
     - name: Build for release
       run: |
