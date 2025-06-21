@@ -79,7 +79,8 @@ jobs:
       run: |
         xcodebuild -workspace BuyingMyHome.xcworkspace \
                    -scheme BuyingMyHome \
-                   -destination 'platform=iOS Simulator,name=Any iOS Simulator Device' \
+                   -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
+            CODE_SIGNING_ALLOWED=NO \
                    build
                    
     - name: Run tests
