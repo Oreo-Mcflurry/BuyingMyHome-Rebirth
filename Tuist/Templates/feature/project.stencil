@@ -1,0 +1,17 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+let project = Project.framework(
+    name: "{{ name }}Feature",
+    bundleId: "com.yoo.BuyingMyhome.{{ name | lowercase }}feature",
+    iOSTargetVersion: "15.0",
+    dependencies: [
+        .core,
+        .designSystem,
+        .rxSwift,
+        .rxCocoa,
+        .rxRelay
+    ],
+    hasTests: true,
+    hasDemo: true
+) 

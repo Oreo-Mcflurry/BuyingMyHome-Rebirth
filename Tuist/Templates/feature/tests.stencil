@@ -1,0 +1,26 @@
+import XCTest
+@testable import {{ name }}Feature
+
+final class {{ name }}ViewControllerTests: XCTestCase {
+    var sut: {{ name }}ViewController!
+    
+    override func setUp() {
+        super.setUp()
+        sut = {{ name }}ViewController()
+    }
+    
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
+    
+    func test_viewDidLoad() {
+        // Given
+        
+        // When
+        sut.loadViewIfNeeded()
+        
+        // Then
+        XCTAssertEqual(sut.title, "{{ name }}")
+    }
+} 

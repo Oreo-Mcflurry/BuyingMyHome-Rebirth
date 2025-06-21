@@ -1,0 +1,51 @@
+import UIKit
+import RxSwift
+import RxCocoa
+import Core
+import DesignSystem
+
+public class {{ name }}ViewController: UIViewController {
+    private let viewModel = {{ name }}ViewModel()
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - UI Components
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "{{ name }}"
+        label.textAlignment = .center
+        label.font = .heading2()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // MARK: - Lifecycle
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        setupBindings()
+    }
+    
+    // MARK: - Setup
+    private func setupUI() {
+        view.backgroundColor = .backgroundLight
+        title = "{{ name }}"
+        
+        view.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    private func setupBindings() {
+        // Input
+        let input = {{ name }}ViewModel.Input()
+        
+        // Output
+        let output = viewModel.transform(input: input)
+        
+        // Bind outputs to UI
+        // Add your bindings here
+    }
+} 

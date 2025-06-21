@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    
+    - name: Install Tuist
+      run: |
+        curl -Ls https://install.tuist.io | bash
+        
+    - name: Cache Tuist
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.tuist
+          .tuist
+        key: ${{ runner.os }}-tuist-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-tuist-
+    
+    - name: Install dependencies
+      run: tuist install
+      
+    - name: Generate project
+      run: tuist generate
+      
+    - name: Build project
+      run: |
+        xcodebuild -workspace BuyingMyHome.xcworkspace \
+                   -scheme BuyingMyHome \
+                   -destination 'platform=iOS Simulator,name=iPhone 15' \
+                   build
+                   
+    - name: Run tests
+      run: |
+        xcodebuild -workspace BuyingMyHome.xcworkspace \
+                   -scheme BuyingMyHome \
+                   -destination 'platform=iOS Simulator,name=iPhone 15' \
+                   test
+                   
+  lint:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install SwiftLint
+      run: brew install swiftlint
+      
+    - name: Run SwiftLint
+      run: swiftlint --strict 

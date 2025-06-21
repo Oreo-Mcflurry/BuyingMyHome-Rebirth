@@ -1,0 +1,29 @@
+import Foundation
+import RxSwift
+import RxCocoa
+import Core
+
+public class {{ name }}ViewModel: BaseViewModelType {
+    
+    // MARK: - Input/Output
+    public struct Input {
+        // Add input properties here
+    }
+    
+    public struct Output {
+        // Add output properties here
+    }
+    
+    // MARK: - Properties
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - Initialization
+    public init() {}
+    
+    // MARK: - Transform
+    public func transform(input: Input) -> Output {
+        // Transform inputs to outputs
+        
+        return Output()
+    }
+} 

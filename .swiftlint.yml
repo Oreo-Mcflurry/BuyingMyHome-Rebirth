@@ -1,0 +1,60 @@
+disabled_rules:
+  - trailing_whitespace
+  - todo
+  - type_name
+
+opt_in_rules:
+  - empty_count
+  - closure_spacing
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - overridden_super_call
+  - redundant_nil_coalescing
+  - switch_case_on_newline
+  - unneeded_parentheses_in_closure_argument
+  - vertical_whitespace_closing_braces
+
+included:
+  - Projects
+  - Tuist/ProjectDescriptionHelpers
+
+excluded:
+  - Tuist/Templates
+  - BuyingMyHome/Sources  # Legacy source, will be removed
+  - BuyingMyHome/Tests    # Legacy test, will be removed
+  - Derived
+
+line_length:
+  warning: 120
+  error: 200
+
+function_body_length:
+  warning: 60
+  error: 100
+
+file_length:
+  warning: 500
+  error: 1200
+
+type_body_length:
+  warning: 300
+  error: 500
+
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - id
+    - UI
+    - rx
+
+custom_rules:
+  imports_order:
+    name: "Imports Order"
+    regex: '^import\s+(?!Foundation|UIKit|RxSwift|RxCocoa|RxRelay)[A-Za-z]+\n^import\s+(Foundation|UIKit|RxSwift|RxCocoa|RxRelay)'
+    message: "System imports should come before third-party imports"
+    severity: warning 
