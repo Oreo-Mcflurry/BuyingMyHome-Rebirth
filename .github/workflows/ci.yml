@@ -49,6 +49,21 @@ jobs:
         key: ${{ runner.os }}-tuist-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
           ${{ runner.os }}-tuist-
+
+    - name: Generate PrivateKey.swift from Secret
+      run: |
+        mkdir -p Tuist/ProjectDescriptionHelpers
+        cat <<EOF > Tuist/ProjectDescriptionHelpers/PrivateKey.swift
+        import Foundation
+
+        public enum PrivateKey {
+            public static let teamID: String = "${{ secrets.APPLE_TEAM_ID }}"
+        }
+        EOF
+
+    - name: Check PrivateKey file
+      run: |
+        sed -n '1,5p' Tuist/ProjectDescriptionHelpers/PrivateKey.swift
     
     - name: Install dependencies
       run: |
