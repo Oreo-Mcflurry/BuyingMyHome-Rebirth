@@ -20,6 +20,7 @@ jobs:
     - name: Install Tuist
       run: |
         curl -Ls https://install.tuist.io | bash
+        export PATH="$HOME/.local/bin:$PATH"
         
     - name: Cache Tuist
       uses: actions/cache@v3
@@ -32,15 +33,19 @@ jobs:
           ${{ runner.os }}-tuist-
     
     - name: Install dependencies
-      run: tuist install
+      run: |
+        export PATH="$HOME/.local/bin:$PATH"
+        tuist install
       
     - name: Generate project
-      run: tuist generate
+      run: |
+        export PATH="$HOME/.local/bin:$PATH"
+        tuist generate
       
     - name: Build for release
       run: |
         xcodebuild -workspace BuyingMyHome.xcworkspace \
-                   -scheme BuyingMyHome-PROD \
+                   -scheme BuyingMyHome \
                    -configuration Release \
                    -destination generic/platform=iOS \
                    archive -archivePath BuyingMyHome.xcarchive
