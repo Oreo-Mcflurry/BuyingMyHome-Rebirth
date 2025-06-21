@@ -29,10 +29,10 @@ jobs:
         ~/.local/bin/mise use tuist@latest
         ~/.local/bin/mise use -g tuist@latest  
 
-     - name: Install Tuist via Mise Action
-        uses: jdx/mise-action@v2
-        with:
-          tools: tuist@latest 
+    - name: Install Tuist via Mise Action
+      uses: jdx/mise-action@v2
+      with:
+        tools: tuist@latest 
     
     - name: Check Tuist path
       run: |
